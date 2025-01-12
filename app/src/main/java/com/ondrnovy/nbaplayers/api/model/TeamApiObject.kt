@@ -1,6 +1,6 @@
 package com.ondrnovy.nbaplayers.api.model
 
-data class Team(
+data class TeamApiObject(
     val id: Int,
     val conference: String,
     val division: String,

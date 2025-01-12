@@ -1,6 +1,6 @@
 package com.ondrnovy.nbaplayers.api.model
 
-data class Player(
+data class PlayerApiObject(
     val id: Int,
     val firstName: String,
     val lastName: String,
@@ -13,5 +13,5 @@ data class Player(
     val draftYear: Int,
     val draftRound: Int,
     val draftNumber: Int,
-    val team: Team
+    val team: TeamApiObject
 )

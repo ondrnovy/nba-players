@@ -1,8 +1,8 @@
 package com.ondrnovy.nbaplayers.api
 
 import com.ondrnovy.nbaplayers.api.model.PaginatedResponse
-import com.ondrnovy.nbaplayers.api.model.Player
-import com.ondrnovy.nbaplayers.api.model.Team
+import com.ondrnovy.nbaplayers.api.model.PlayerApiObject
+import com.ondrnovy.nbaplayers.api.model.TeamApiObject
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,15 +13,15 @@ interface BallDontLieApi {
     fun getPlayers(
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
-    ): Call<PaginatedResponse<Player>>
+    ): Call<PaginatedResponse<PlayerApiObject>>
 
     @GET("players/{id}")
     fun getPlayerById(
         @Path("id") id: Int
-    ): Call<Player>
+    ): Call<PlayerApiObject>
 
     @GET("teams")
-    fun getTeams(): Call<List<Team>>
+    fun getTeams(): Call<List<TeamApiObject>>
 
     /*@GET("games")
     fun getGames(
