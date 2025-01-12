@@ -20,7 +20,7 @@ fun PlayersRouter() {
     val navController = rememberNavController()
     val viewModel: PlayersViewModel = koinViewModel()
 
-    NavHost(navController, startDestination = PlayersRoutes.ListOfPlayers) {
+    NavHost(navController, startDestination = PlayersRoutes.ListOfPlayers.route) {
         composable(PlayersRoutes.ListOfPlayers.route) {
             ListOfPlayersScreen(
                 navController = navController,

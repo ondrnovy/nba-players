@@ -22,9 +22,9 @@ fun provideRetrofit(
         .create()
 
     return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
+        .baseUrl(baseUrl)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
 }
 
 

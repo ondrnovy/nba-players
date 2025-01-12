@@ -5,5 +5,10 @@
 */
 package com.ondrnovy.nbaplayers.presentation.viewmodel
 
-class PlayersViewModel {
+import androidx.lifecycle.ViewModel
+import com.ondrnovy.nbaplayers.data.PlayerRepository
+
+class PlayersViewModel(
+    val playerRepository: PlayerRepository,
+) : ViewModel() {
 }
