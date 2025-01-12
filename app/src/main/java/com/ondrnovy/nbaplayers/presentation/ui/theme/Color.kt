@@ -1,4 +1,4 @@
-package com.ondrnovy.nbaplayers.ui.theme
+package com.ondrnovy.nbaplayers.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.ondrnovy.nbaplayers.ui.theme
+package com.ondrnovy.nbaplayers.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

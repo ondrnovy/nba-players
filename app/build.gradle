@@ -46,11 +46,10 @@ dependencies {
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.material3
 
-    // Network dependecies
+    // Network
     implementation platform(libs.retrofit.bom)
     implementation libs.retrofit.core
-    implementation libs.retrofit.converter.scalars
-    implementation libs.retrofit.converter.moshi
+    implementation libs.retrofit.gson
 
     // Dependecy injection
     implementation platform(libs.koin.bom)
