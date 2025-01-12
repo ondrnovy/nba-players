@@ -60,6 +60,10 @@ dependencies {
     // Image caching
     implementation libs.glide
 
+    // Compose
+    implementation libs.navigation.compose
+
+
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
