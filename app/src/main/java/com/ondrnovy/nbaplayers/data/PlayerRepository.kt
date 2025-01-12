@@ -11,10 +11,10 @@ class PlayerRepository(
     private val ballDontLieApi: BallDontLieApi,
 ) {
     suspend fun getPlayers(
-        page: Int,
-        pageSize: Int,
+        cursor: Int?,
+        perPage: Int,
     ) = try {
-            Result.success(ballDontLieApi.getPlayers(page, pageSize).data.map { it.toEntity() })
+            Result.success(ballDontLieApi.getPlayers(cursor, perPage).toPaginatedPlayersEntity())
         } catch (e: Exception) {
             Result.failure(Exception("Network error: ${e.localizedMessage}", e))
         }

@@ -13,16 +13,21 @@ import com.ondrnovy.nbaplayers.data.model.PlayerEntity
 class PlayersPagingSource(
     private val playerRepository: PlayerRepository,
 ) : PagingSource<Int, PlayerEntity>() {
+
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PlayerEntity> {
-        val page = params.key ?: 1
+
         return try {
-            val result = playerRepository.getPlayers(page, params.loadSize)
+            val result = playerRepository.getPlayers(params.key, params.loadSize)
             return if (result.isSuccess) {
-                result.getOrNull()?.let { playerList ->
+                result.getOrNull()?.let { paginatedPlayers ->
+                    val paginationMetaData = paginatedPlayers.meta
+                    val nextCursor = paginationMetaData.nextCursor
+
                     LoadResult.Page(
-                        data = playerList,
-                        prevKey = if (page == 1) null else page - 1,
-                        nextKey = if (playerList.isEmpty()) null else page + 1
+                        data = paginatedPlayers.data,
+                        prevKey = null,
+                        nextKey = nextCursor,
                     )
                 } ?: LoadResult.Error(Exception("Empty response"))
             }

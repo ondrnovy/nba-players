@@ -59,7 +59,7 @@ class PlayersViewModel(
 
 
     val pager = Pager(
-        config = PagingConfig(pageSize = PLAYERS_PAGE_SIZE),
+        config = PagingConfig(pageSize = 35),
         pagingSourceFactory = {
             PlayersPagingSource(playerRepository = playerRepository)
         }

@@ -5,8 +5,12 @@
 */
 package com.ondrnovy.nbaplayers.data
 
+import com.ondrnovy.nbaplayers.api.model.PaginatedResponse
+import com.ondrnovy.nbaplayers.api.model.PaginationMetaDataApiObject
 import com.ondrnovy.nbaplayers.api.model.PlayerApiObject
 import com.ondrnovy.nbaplayers.api.model.TeamApiObject
+import com.ondrnovy.nbaplayers.data.model.PaginatedPlayersEntity
+import com.ondrnovy.nbaplayers.data.model.PaginationMetaDataEntity
 import com.ondrnovy.nbaplayers.data.model.PlayerEntity
 import com.ondrnovy.nbaplayers.data.model.TeamEntity
 
@@ -35,4 +39,16 @@ fun TeamApiObject.toEntity() = TeamEntity(
     name = this.name,
     fullName = this.fullName,
     abbreviation = this.abbreviation
+)
+
+fun PaginationMetaDataApiObject.toEntity(): PaginationMetaDataEntity {
+    return PaginationMetaDataEntity(
+        perPage = this.perPage,
+        nextCursor = this.nextCursor
+    )
+}
+
+fun PaginatedResponse<PlayerApiObject>.toPaginatedPlayersEntity() = PaginatedPlayersEntity(
+    data = this.data.map { it.toEntity() },
+    meta = this.meta.toEntity()
 )

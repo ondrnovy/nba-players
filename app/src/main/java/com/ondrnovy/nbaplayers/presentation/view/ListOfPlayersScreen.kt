@@ -37,14 +37,7 @@ fun ListOfPlayersScreen(
 
             Text(text = "Players")
 
-            LazyColumn {
-                items(lazyPagingItems.itemCount) { index ->
-                    val item = lazyPagingItems[index]
-                    item?.toUiState()?.let {
-                        PlayerListItem(it)
-                    }
-                }
-            }
+
 
             when (lazyPagingItems.loadState.refresh) {
                 is LoadState.Loading -> {
@@ -56,9 +49,31 @@ fun ListOfPlayersScreen(
                 }
 
                 else -> {
+                    LazyColumn {
+                        items(lazyPagingItems.itemCount) { index ->
+                            val item = lazyPagingItems[index]
+                            item?.toUiState()?.let {
+                                PlayerListItem(it)
+                            }
+                        }
+                    }
 
+                    when (lazyPagingItems.loadState.append) {
+                        is LoadState.Loading -> {
+                            CircularProgressIndicator()
+                        }
+
+                        is LoadState.Error -> {
+                            Text("An error occurred")
+                        }
+
+                        else -> {
+
+                        }
+                    }
                 }
             }
+
 
             Button(onClick = {
                 lazyPagingItems.refresh()
