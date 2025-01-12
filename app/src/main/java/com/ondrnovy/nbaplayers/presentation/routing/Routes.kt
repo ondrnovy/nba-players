@@ -5,7 +5,8 @@
 */
 package com.ondrnovy.nbaplayers.presentation.routing
 
-sealed class PlayersRoutes(val route: String) {
-    data object ListOfPlayers : PlayersRoutes("list_of_players")
-    data object PlayerDetail : PlayersRoutes("player_detail")
+sealed class Routes(val route: String) {
+    data object ListOfPlayers : Routes("list_of_players")
+    data object PlayerDetail : Routes("player_detail")
+    data object TeamDetail : Routes("team_detail")
 }

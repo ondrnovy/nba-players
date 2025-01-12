@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import com.ondrnovy.nbaplayers.presentation.routing.PlayersRouter
 import com.ondrnovy.nbaplayers.presentation.theme.NBAPlayersTheme
 
-class PlayersActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

@@ -7,15 +7,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.ondrnovy.nbaplayers.presentation.theme.NBAPlayersTheme
-import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayersViewModel
-
+import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamViewModel
 
 @Composable
-fun ListOfPlayersScreen(
+fun TeamDetailScreen(
     navController: NavController,
-    viewModel: PlayersViewModel,
+    viewModel: TeamViewModel,
 ) {
-    val uiState by viewModel.listOfPlayersUiState.collectAsState()
+    val uiState by viewModel.teamDetailUiState.collectAsState()
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
@@ -24,7 +23,7 @@ fun ListOfPlayersScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun ListOfPlayersScreenPreview() {
+fun TeamDetailScreenPreview() {
     NBAPlayersTheme {
     }
 }
