@@ -10,10 +10,10 @@ import retrofit2.http.Query
 
 interface BallDontLieApi {
     @GET("players")
-    fun getPlayers(
+    suspend fun getPlayers(
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
-    ): Call<PaginatedResponse<PlayerApiObject>>
+    ): PaginatedResponse<PlayerApiObject>
 
     @GET("players/{id}")
     fun getPlayerById(

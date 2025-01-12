@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ondrnovy.nbaplayers.data.TeamRepository
 import com.ondrnovy.nbaplayers.data.model.TeamEntity
-import com.ondrnovy.nbaplayers.presentation.view.TeamDetailUiState
+import com.ondrnovy.nbaplayers.presentation.model.TeamDetailUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map

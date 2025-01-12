@@ -1,0 +1,43 @@
+/*
+* Urheberrechtshinweis: Diese Software ist urheberrechtlich geschützt. Das Urheberrecht liegt bei
+* Research Industrial Systems Engineering (RISE) Forschungs-, Entwicklungs- und Großprojektberatung GmbH,
+* soweit nicht im Folgenden näher gekennzeichnet.
+*/
+package com.ondrnovy.nbaplayers.presentation.pagination
+
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.ondrnovy.nbaplayers.data.PlayerRepository
+import com.ondrnovy.nbaplayers.data.model.PlayerEntity
+
+class PlayersPagingSource(
+    private val playerRepository: PlayerRepository,
+) : PagingSource<Int, PlayerEntity>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PlayerEntity> {
+        val page = params.key ?: 1
+        return try {
+            val result = playerRepository.getPlayers(page, params.loadSize)
+            return if (result.isSuccess) {
+                result.getOrNull()?.let { playerList ->
+                    LoadResult.Page(
+                        data = playerList,
+                        prevKey = if (page == 1) null else page - 1,
+                        nextKey = if (playerList.isEmpty()) null else page + 1
+                    )
+                } ?: LoadResult.Error(Exception("Empty response"))
+            }
+            else {
+                LoadResult.Error(result.exceptionOrNull() ?: Exception("Unknown error"))
+            }
+        } catch (e: Exception) {
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, PlayerEntity>): Int? {
+        return state.anchorPosition?.let { anchor ->
+            state.closestPageToPosition(anchor)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchor)?.nextKey?.minus(1)
+        }
+    }
+}

@@ -2,10 +2,23 @@ package com.ondrnovy.nbaplayers.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.ondrnovy.nbaplayers.AppConfig
 import com.ondrnovy.nbaplayers.api.BallDontLieApi
+import com.ondrnovy.nbaplayers.network.AuthenticationInterceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
+fun provideOkHttpClient(
+    authToken: String,
+): OkHttpClient {
+    return OkHttpClient.Builder()
+        .addInterceptor(
+            AuthenticationInterceptor(authToken = authToken)
+        )
+        .build()
+}
 
 /**
  * Creates new Retrofit instance
@@ -16,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 fun provideRetrofit(
     baseUrl: String,
+    okHttpClient: OkHttpClient,
 ): Retrofit {
     val gson: Gson = GsonBuilder()
         .setFieldNamingPolicy(com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -23,6 +37,7 @@ fun provideRetrofit(
 
     return Retrofit.Builder()
         .baseUrl(baseUrl)
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 }

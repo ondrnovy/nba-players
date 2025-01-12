@@ -60,9 +60,12 @@ dependencies {
     // Image caching
     implementation libs.glide
 
-    // Compose
-    implementation libs.navigation.compose
+    // Navigation
+    implementation libs.androidx.navigation.compose
 
+    // Pagination
+    implementation libs.androidx.paging.compose
+    implementation libs.androidx.paging.runtime
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit

@@ -1,6 +1,6 @@
 package com.ondrnovy.nbaplayers.api.model
 
-data class Meta(
+data class PaginationMetaData(
     val totalPages: Int,
     val currentPage: Int,
     val nextPage: Int?,
