@@ -9,5 +9,7 @@ import com.ondrnovy.nbaplayers.data.model.PlayerEntity
 
 fun PlayerEntity.toUiState() = PlayerListItemUiState(
     id = id.toString(),
-    name = firstName,
+    fullName = firstName + " " + lastName,
+    position = position,
+    teamName = team.name,
 )

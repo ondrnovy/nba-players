@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import androidx.paging.map
 import com.ondrnovy.nbaplayers.AppConfig.PLAYERS_PAGE_SIZE
 import com.ondrnovy.nbaplayers.data.PlayerRepository
 import com.ondrnovy.nbaplayers.data.model.PlayerEntity
@@ -17,6 +18,7 @@ import com.ondrnovy.nbaplayers.presentation.pagination.PlayersPagingSource
 import com.ondrnovy.nbaplayers.presentation.model.ListOfPlayersUiState
 import com.ondrnovy.nbaplayers.presentation.model.PlayerDetailUiState
 import com.ondrnovy.nbaplayers.presentation.model.PlayerListItemUiState
+import com.ondrnovy.nbaplayers.presentation.model.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -25,7 +27,6 @@ import kotlinx.coroutines.flow.update
 
 class PlayersViewModel(
     val playerRepository: PlayerRepository,
-    val playersPagingSource: PlayersPagingSource,
 ) : ViewModel() {
 
     private val viewModelState =
@@ -37,14 +38,18 @@ class PlayersViewModel(
             ),
         )
 
-    internal val listOfPlayersUiState =
-        viewModelState
-            .map { it.toListOfPlayersUiState() }
-            .stateIn(
-                viewModelScope,
-                SharingStarted.Eagerly,
-                viewModelState.value.toListOfPlayersUiState(),
-            )
+    private val pager = Pager(
+        config = PagingConfig(pageSize = PLAYERS_PAGE_SIZE),
+        pagingSourceFactory = {
+            PlayersPagingSource(playerRepository = playerRepository)
+        }
+    )
+    val playersPagingDataFlow = pager.flow.cachedIn(viewModelScope).map {
+        it.map { it.toUiState() }
+    }
+
+
+
 
     internal val playerDetailUiState =
         viewModelState
@@ -56,30 +61,16 @@ class PlayersViewModel(
             )
 
 
-
-
-    val pager = Pager(
-        config = PagingConfig(pageSize = 35),
-        pagingSourceFactory = {
-            PlayersPagingSource(playerRepository = playerRepository)
-        }
-    )
-    val pagingDataFlow = pager.flow.cachedIn(viewModelScope)
-
-
-
-
-
-    init {
-        loadPlayers()
-    }
-
     fun loadPlayers() {
         viewModelState.update {
             it.copy(
                 isLoading = true,
             )
         }
+    }
+
+    init {
+
     }
 }
 
@@ -89,7 +80,7 @@ data class PlayersViewModelState(
     val playerList: List<PlayerEntity>,
     val selectedPlayer: PlayerEntity? = null,
 ) {
-    fun toListOfPlayersUiState(): ListOfPlayersUiState {
+    /*fun toListOfPlayersUiState(): ListOfPlayersUiState {
         return if (isLoading) {
             ListOfPlayersUiState.Loading
         }
@@ -108,7 +99,7 @@ data class PlayersViewModelState(
                 },
             )
         }
-    }
+    }*/
 
     fun toPlayerDetailUiState(): PlayerDetailUiState? {
         selectedPlayer ?: return null

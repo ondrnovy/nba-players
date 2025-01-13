@@ -42,7 +42,7 @@ val koinModule: Module = module {
     }
 
     viewModel {
-        PlayersViewModel(get(), get())
+        PlayersViewModel(get())
     }
 
     viewModel {

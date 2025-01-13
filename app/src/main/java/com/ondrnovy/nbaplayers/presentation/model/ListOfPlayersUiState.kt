@@ -1,20 +1,14 @@
 package com.ondrnovy.nbaplayers.presentation.model
 
-sealed class ListOfPlayersUiState {
-    data class Content(
-        //val pagedPlayers: PagingData<PlayerListItemUiState>,
-        val playerList: List<PlayerListItemUiState>,
-        //val isLoadingMore: Boolean,
-    ): ListOfPlayersUiState()
+import androidx.paging.PagingData
 
-    data object Loading: ListOfPlayersUiState()
-
-    data class Error(
-        val message: String,
-    ): ListOfPlayersUiState()
-}
+data class ListOfPlayersUiState(
+    val pagedPlayers: PagingData<PlayerListItemUiState>?
+)
 
 data class PlayerListItemUiState(
     val id: String,
-    val name: String,
+    val fullName: String,
+    val position: String,
+    val teamName: String,
 )
