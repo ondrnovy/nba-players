@@ -19,7 +19,6 @@ class PlayerRepository(
             Result.failure(Exception("Network error: ${e.localizedMessage}", e))
         }
 
-
     suspend fun getPlayerById(
         id: Int,
     ) = try {
@@ -28,5 +27,4 @@ class PlayerRepository(
     } catch (e: Exception) {
         Result.failure(Exception("Network error: ${e.localizedMessage}", e))
     }
-
 }

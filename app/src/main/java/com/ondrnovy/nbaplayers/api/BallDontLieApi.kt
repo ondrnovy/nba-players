@@ -21,18 +21,9 @@ interface BallDontLieApi {
         @Path("id") id: Int
     ): Response<PlayerApiObject>
 
-    @GET("teams")
-    fun getTeams(): Call<List<TeamApiObject>>
 
-    /*@GET("games")
-    fun getGames(
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
-    ): Call<PaginatedResponse<Game>>
-
-    @GET("stats")
-    fun getStats(
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
-    ): Call<PaginatedResponse<Stat>>*/
+    @GET("players/{id}")
+    suspend fun getTeamById(
+        @Path("id") id: Int
+    ): Response<TeamApiObject>
 }

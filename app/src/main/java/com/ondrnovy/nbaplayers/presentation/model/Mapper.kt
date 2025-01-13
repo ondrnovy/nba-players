@@ -6,6 +6,7 @@
 package com.ondrnovy.nbaplayers.presentation.model
 
 import com.ondrnovy.nbaplayers.data.model.PlayerEntity
+import com.ondrnovy.nbaplayers.data.model.TeamEntity
 
 fun PlayerEntity.toUiState() = PlayerListItemUiState(
     id = id.toString(),
@@ -24,9 +25,22 @@ fun PlayerEntity.toPlayerDetailUiState(): PlayerDetailUiState.Content {
         jerseyNumber = jerseyNumber,
         college = college,
         country = country,
-        draftYear = draftYear,
-        draftRound = draftRound,
-        draftNumber = draftNumber,
-        teamName = team?.name.orEmpty()
+        draftYear = draftYear.toString(),
+        draftRound = draftRound.toString(),
+        draftNumber = draftNumber.toString(),
+        teamId = team.id.toString(),
+        teamName = team.name
+    )
+}
+
+fun TeamEntity.toTeamDetailUiState(): TeamDetailUiState.Content {
+    return TeamDetailUiState.Content(
+        id = id.toString(),
+        conference = conference,
+        division = division,
+        city = city,
+        name = name,
+        fullName = fullName,
+        abbreviation = abbreviation,
     )
 }

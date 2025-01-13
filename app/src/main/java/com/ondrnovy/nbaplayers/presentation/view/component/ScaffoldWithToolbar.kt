@@ -25,6 +25,7 @@ import com.ondrnovy.nbaplayers.R
 fun ScaffoldWithTopBar(
     modifier: Modifier = Modifier,
     title: String = stringResource(id = R.string.app_name),
+    showBackButton: Boolean = true,
     onBackPressed: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
@@ -39,11 +40,13 @@ fun ScaffoldWithTopBar(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onBackPressed() }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
+                    if (showBackButton) {
+                        IconButton(onClick = { onBackPressed() }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back"
+                            )
+                        }
                     }
                 },
             )

@@ -1,10 +1,15 @@
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ondrnovy.nbaplayers.R
 import com.ondrnovy.nbaplayers.presentation.model.PlayerDetailUiState
+import com.ondrnovy.nbaplayers.presentation.routing.Route
 import com.ondrnovy.nbaplayers.presentation.theme.NBAPlayersTheme
 import com.ondrnovy.nbaplayers.presentation.view.component.ErrorView
 import com.ondrnovy.nbaplayers.presentation.view.component.LoaderView
@@ -29,7 +35,10 @@ fun PlayerDetailScreen(
         uiState = uiState,
         onBackPressed = {
             navController.popBackStack()
-        }
+        },
+        onShowTeamDetails = { teamId ->
+            navController.navigate(Route.TeamDetail.route.replace("{${Route.TEAM_DETAIL_ID_KEY}}", teamId))
+        },
     )
 }
 
@@ -38,6 +47,7 @@ fun PlayerDetailScreen(
 private fun PlayerDetailContent(
     uiState: PlayerDetailUiState,
     onBackPressed: () -> Unit = {},
+    onShowTeamDetails: (teamId: String) -> Unit = {},
 ) {
     ScaffoldWithTopBar(
         modifier = Modifier
@@ -54,6 +64,7 @@ private fun PlayerDetailContent(
                 is PlayerDetailUiState.Content -> {
                     Content(
                         uiState = uiState,
+                        onShowTeamDetails = onShowTeamDetails,
                     )
                 }
                 PlayerDetailUiState.Empty -> {}
@@ -72,17 +83,49 @@ private fun PlayerDetailContent(
 
 
 @Composable
+private fun InfoItem(
+    title: String,
+    value: String,
+){
+    Row (
+        modifier = Modifier
+            .padding(vertical = 8.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ){
+        Text(text = title)
+
+        Text(text = value)
+    }
+}
+
+@Composable
 private fun Content(
-    uiState: PlayerDetailUiState.Content
+    uiState: PlayerDetailUiState.Content,
+    onShowTeamDetails: (teamId: String) -> Unit = {},
 ) {
     Column (
         modifier = Modifier.fillMaxSize()
     ){
-        Text(text = uiState.fullName)
-        Text(text = uiState.position)
-        Text(text = uiState.teamName)
-        Text(text = uiState.height)
-        Text(text = uiState.weight)
+        InfoItem("Position", uiState.position)
+        InfoItem("Height", uiState.height)
+        InfoItem("Weight", uiState.weight)
+        InfoItem("College", uiState.college)
+        InfoItem("Country", uiState.country)
+        InfoItem("Jersey number", uiState.jerseyNumber)
+        InfoItem("Draft number", uiState.draftNumber)
+        InfoItem("Draft year", uiState.draftYear)
+        InfoItem("Draft round", uiState.draftRound)
+        InfoItem("Team name", uiState.teamName)
+
+        Button(
+           onClick = {
+               onShowTeamDetails(uiState.teamId)
+           }
+        ) {
+            Text(text = "More about the Team")
+        }
     }
 }
 
@@ -97,14 +140,15 @@ fun PlayerDetailScreenPreview() {
                 fullName = "Player Name",
                 position = "Position",
                 teamName = "Team Name",
+                teamId = "1",
                 height = "Height",
                 weight = "55 kg",
                 jerseyNumber = "123",
                 college = "Harvard",
                 country = "Country",
-                draftYear = 2022,
-                draftRound = 5,
-                draftNumber = 4,
+                draftYear = "2022",
+                draftRound = "5",
+                draftNumber = "4",
             )
         )
     }

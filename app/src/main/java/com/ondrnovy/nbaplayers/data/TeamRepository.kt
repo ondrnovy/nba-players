@@ -18,27 +18,12 @@ import retrofit2.Response
 class TeamRepository(
     private val ballDontLieApi: BallDontLieApi,
 ) {
-    fun getTeams(
-        onSuccess: (List<TeamEntity>) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        val call = ballDontLieApi.getTeams()
-        call.enqueue(object : Callback<List<TeamApiObject>> {
-            override fun onResponse(
-                call: Call<List<TeamApiObject>>,
-                response: Response<List<TeamApiObject>>
-            ) {
-                if (response.isSuccessful) {
-                    val teams = response.body() ?: emptyList()
-                    onSuccess(teams.map { it.toEntity() })
-                } else {
-                    onError("Error: ${response.errorBody()?.string()}")
-                }
-            }
-
-            override fun onFailure(call: Call<List<TeamApiObject>>, t: Throwable) {
-                onError("Network error: ${t.localizedMessage}")
-            }
-        })
+    suspend fun getTeamById(
+        id: Int,
+    ) = try {
+        val team = ballDontLieApi.getTeamById(id).data
+        Result.success(team.toEntity())
+    } catch (e: Exception) {
+        Result.failure(Exception("Network error: ${e.localizedMessage}", e))
     }
 }

@@ -2,9 +2,9 @@ package com.ondrnovy.nbaplayers.presentation.model
 
 
 sealed class PlayerDetailUiState{
-    object Empty : PlayerDetailUiState()
+    data object Empty : PlayerDetailUiState()
 
-    object Loading : PlayerDetailUiState()
+    data object Loading : PlayerDetailUiState()
 
     data class Content(
         val id: String,
@@ -15,9 +15,10 @@ sealed class PlayerDetailUiState{
         val jerseyNumber: String,
         val college: String,
         val country: String,
-        val draftYear: Int,
-        val draftRound: Int,
-        val draftNumber: Int,
+        val draftYear: String,
+        val draftRound: String,
+        val draftNumber: String,
+        val teamId: String,
         val teamName: String,
     ) : PlayerDetailUiState()
 
