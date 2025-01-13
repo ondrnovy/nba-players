@@ -80,13 +80,15 @@ data class PlayerDetailViewModelState(
     val error: String,
     val selectedPlayer: PlayerEntity?,
 ) {
-    fun toPlayerDetailUiState(): PlayerDetailUiState? {
+    fun toPlayerDetailUiState(): PlayerDetailUiState {
         return if (isLoading){
             PlayerDetailUiState.Loading
         } else if (error.isNotEmpty()){
             PlayerDetailUiState.Error(error)
+        } else if (selectedPlayer != null) {
+            selectedPlayer.toPlayerDetailUiState()
         } else {
-            selectedPlayer?.toPlayerDetailUiState()
+            PlayerDetailUiState.Empty
         }
     }
 }

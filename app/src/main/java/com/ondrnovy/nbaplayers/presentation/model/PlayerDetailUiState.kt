@@ -2,6 +2,8 @@ package com.ondrnovy.nbaplayers.presentation.model
 
 
 sealed class PlayerDetailUiState{
+    object Empty : PlayerDetailUiState()
+
     object Loading : PlayerDetailUiState()
 
     data class Content(

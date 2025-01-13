@@ -2,6 +2,7 @@ package com.ondrnovy.nbaplayers.api
 
 import com.ondrnovy.nbaplayers.api.model.PaginatedResponse
 import com.ondrnovy.nbaplayers.api.model.PlayerApiObject
+import com.ondrnovy.nbaplayers.api.model.Response
 import com.ondrnovy.nbaplayers.api.model.TeamApiObject
 import retrofit2.Call
 import retrofit2.http.GET
@@ -18,7 +19,7 @@ interface BallDontLieApi {
     @GET("players/{id}")
     suspend fun getPlayerById(
         @Path("id") id: Int
-    ): PlayerApiObject
+    ): Response<PlayerApiObject>
 
     @GET("teams")
     fun getTeams(): Call<List<TeamApiObject>>

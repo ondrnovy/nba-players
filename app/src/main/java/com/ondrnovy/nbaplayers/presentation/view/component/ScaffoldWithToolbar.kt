@@ -3,7 +3,7 @@
 * Research Industrial Systems Engineering (RISE) Forschungs-, Entwicklungs- und Großprojektberatung GmbH,
 * soweit nicht im Folgenden näher gekennzeichnet.
 */
-package com.ondrnovy.nbaplayers.presentation.view
+package com.ondrnovy.nbaplayers.presentation.view.component
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth

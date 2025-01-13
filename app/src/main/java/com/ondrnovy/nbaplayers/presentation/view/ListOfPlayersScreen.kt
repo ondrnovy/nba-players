@@ -4,10 +4,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,15 +16,16 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ondrnovy.nbaplayers.presentation.model.PlayerListItemUiState
 import com.ondrnovy.nbaplayers.presentation.routing.Route
-import com.ondrnovy.nbaplayers.presentation.view.CenteredLoader
-import com.ondrnovy.nbaplayers.presentation.view.ScaffoldWithTopBar
-import com.ondrnovy.nbaplayers.presentation.viewmodel.ListOfPLayersViewModel
+import com.ondrnovy.nbaplayers.presentation.view.component.ErrorView
+import com.ondrnovy.nbaplayers.presentation.view.component.LoaderView
+import com.ondrnovy.nbaplayers.presentation.view.component.ScaffoldWithTopBar
+import com.ondrnovy.nbaplayers.presentation.viewmodel.ListOfPlayersViewModel
 
 
 @Composable
 fun ListOfPlayersScreen(
     navController: NavController,
-    viewModel: ListOfPLayersViewModel,
+    viewModel: ListOfPlayersViewModel,
 ) {
     val lazyPagingItems = viewModel.playersPagingDataFlow.collectAsLazyPagingItems()
 
@@ -34,7 +33,7 @@ fun ListOfPlayersScreen(
     ListOfPlayersContent(
         lazyPagingItems = lazyPagingItems,
         navigateToPlayerDetail = {
-            navController.navigate(Route.PlayerDetail)
+            navController.navigate(Route.PlayerDetail.route.replace("{${Route.PLAYER_DETAIL_ID_KEY}}", it))
         }
     )
 }
@@ -61,7 +60,7 @@ fun PlayerListItem(
 }
 
 @Composable
-fun ListOfPlayersContent(
+private fun ListOfPlayersContent(
     lazyPagingItems: LazyPagingItems<PlayerListItemUiState>,
     navigateToPlayerDetail: (id: String) -> Unit,
 ) {
@@ -76,11 +75,16 @@ fun ListOfPlayersContent(
         ) {
             when (lazyPagingItems.loadState.refresh) {
                 is LoadState.Loading -> {
-                    CenteredLoader()
+                    LoaderView(
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
 
                 is LoadState.Error -> {
-                    Text("An error occurred")
+                    ErrorView(
+                        modifier = Modifier.fillMaxWidth(),
+                        message = (lazyPagingItems.loadState.refresh as LoadState.Error).error.message ?: "Unknown error",
+                    )
                 }
 
                 else -> {
@@ -107,11 +111,16 @@ fun ListOfPlayersContent(
 
                     when (lazyPagingItems.loadState.append) {
                         is LoadState.Loading -> {
-                            CenteredLoader()
+                            LoaderView(
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
 
                         is LoadState.Error -> {
-                            Text("An error occurred")
+                            ErrorView(
+                                modifier = Modifier.fillMaxWidth(),
+                                message = (lazyPagingItems.loadState.append as LoadState.Error).error.message ?: "Unknown error",
+                            )
                         }
 
                         else -> {}

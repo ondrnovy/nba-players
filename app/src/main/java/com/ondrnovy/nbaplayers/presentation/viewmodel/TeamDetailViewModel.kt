@@ -45,7 +45,7 @@ data class TeamViewModelState(
     fun toTeamDetailUiState(): TeamDetailUiState {
         return TeamDetailUiState(
             isLoading = isLoading,
-            name = team?.name ?: "",
+            name = team?.name.orEmpty(),
         )
     }
 }

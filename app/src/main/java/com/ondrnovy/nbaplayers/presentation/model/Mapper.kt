@@ -11,7 +11,7 @@ fun PlayerEntity.toUiState() = PlayerListItemUiState(
     id = id.toString(),
     fullName = "$firstName $lastName",
     position = position,
-    teamName = team.name,
+    teamName = team?.name.orEmpty(),
 )
 
 fun PlayerEntity.toPlayerDetailUiState(): PlayerDetailUiState.Content {
@@ -27,6 +27,6 @@ fun PlayerEntity.toPlayerDetailUiState(): PlayerDetailUiState.Content {
         draftYear = draftYear,
         draftRound = draftRound,
         draftNumber = draftNumber,
-        teamName = team.name
+        teamName = team?.name.orEmpty()
     )
 }
