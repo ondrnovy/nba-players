@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App Name -->
     <string name="app_name">NBA hráči</string>
 
-    <!-- Common Labels -->
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="submit">Submit</string>
-    <string name="next">Next</string>
-    <string name="back">Back</string>
+    <string name="position">Pozice</string>
+    <string name="height">Výška</string>
+    <string name="weight">Hmotnost</string>
+    <string name="college">Univerzita</string>
+    <string name="country">Země</string>
+    <string name="jersey_number">Číslo dresu</string>
+    <string name="draft_number">Číslo draftu</string>
+    <string name="draft_year">Rok draftu</string>
+    <string name="draft_round">Kolo draftu</string>
+    <string name="team_name">Název týmu</string>
+    <string name="city">Město</string>
+    <string name="name">Jméno</string>
+    <string name="division">Divize</string>
+    <string name="abbreviation">Zkratka</string>
+    <string name="conference">Konference</string>
+    <string name="moreAboutTeam">Více o týmu</string>
 </resources>

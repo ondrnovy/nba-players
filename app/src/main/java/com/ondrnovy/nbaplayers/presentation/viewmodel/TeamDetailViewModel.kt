@@ -70,6 +70,10 @@ class TeamDetailViewModel(
                 }
         }
     }
+
+    init {
+        loadTeamById()
+    }
 }
 
 data class TeamViewModelState(

@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,6 +19,7 @@ import com.ondrnovy.nbaplayers.presentation.model.PlayerDetailUiState
 import com.ondrnovy.nbaplayers.presentation.routing.Route
 import com.ondrnovy.nbaplayers.presentation.theme.NBAPlayersTheme
 import com.ondrnovy.nbaplayers.presentation.view.component.ErrorView
+import com.ondrnovy.nbaplayers.presentation.view.component.InfoItem
 import com.ondrnovy.nbaplayers.presentation.view.component.LoaderView
 import com.ondrnovy.nbaplayers.presentation.view.component.ScaffoldWithTopBar
 import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayerDetailViewModel
@@ -52,7 +52,7 @@ private fun PlayerDetailContent(
     ScaffoldWithTopBar(
         modifier = Modifier
             .fillMaxSize(),
-        title = if(uiState is PlayerDetailUiState.Content) uiState.fullName else stringResource(id = R.string.app_name),
+        title = if(uiState is PlayerDetailUiState.Content) uiState.fullName else "",
         onBackPressed = onBackPressed,
     ) { innerPadding ->
         Column(
@@ -76,27 +76,7 @@ private fun PlayerDetailContent(
                     modifier = Modifier.fillMaxSize(),
                 )
             }
-
         }
-    }
-}
-
-
-@Composable
-private fun InfoItem(
-    title: String,
-    value: String,
-){
-    Row (
-        modifier = Modifier
-            .padding(vertical = 8.dp)
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ){
-        Text(text = title)
-
-        Text(text = value)
     }
 }
 
@@ -108,23 +88,28 @@ private fun Content(
     Column (
         modifier = Modifier.fillMaxSize()
     ){
-        InfoItem("Position", uiState.position)
-        InfoItem("Height", uiState.height)
-        InfoItem("Weight", uiState.weight)
-        InfoItem("College", uiState.college)
-        InfoItem("Country", uiState.country)
-        InfoItem("Jersey number", uiState.jerseyNumber)
-        InfoItem("Draft number", uiState.draftNumber)
-        InfoItem("Draft year", uiState.draftYear)
-        InfoItem("Draft round", uiState.draftRound)
-        InfoItem("Team name", uiState.teamName)
+        InfoItem(stringResource(id = R.string.position), uiState.position)
+        InfoItem(stringResource(id = R.string.height), uiState.height)
+        InfoItem(stringResource(id = R.string.weight), uiState.weight)
+        InfoItem(stringResource(id = R.string.college), uiState.college)
+        InfoItem(stringResource(id = R.string.country), uiState.country)
+        InfoItem(stringResource(id = R.string.jersey_number), uiState.jerseyNumber)
+        InfoItem(stringResource(id = R.string.draft_number), uiState.draftNumber)
+        InfoItem(stringResource(id = R.string.draft_year), uiState.draftYear)
+        InfoItem(stringResource(id = R.string.draft_round), uiState.draftRound)
+        InfoItem(stringResource(id = R.string.team_name), uiState.teamName)
 
-        Button(
-           onClick = {
-               onShowTeamDetails(uiState.teamId)
-           }
-        ) {
-            Text(text = "More about the Team")
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+        ){
+            Button(
+                onClick = {
+                    onShowTeamDetails(uiState.teamId)
+                }
+            ) {
+                Text(text = stringResource(id = R.string.moreAboutTeam))
+            }
         }
     }
 }

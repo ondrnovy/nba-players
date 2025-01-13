@@ -22,7 +22,7 @@ interface BallDontLieApi {
     ): Response<PlayerApiObject>
 
 
-    @GET("players/{id}")
+    @GET("teams/{id}")
     suspend fun getTeamById(
         @Path("id") id: Int
     ): Response<TeamApiObject>
