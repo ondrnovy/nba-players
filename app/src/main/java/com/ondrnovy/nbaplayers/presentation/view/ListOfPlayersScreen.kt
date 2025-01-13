@@ -34,6 +34,9 @@ fun ListOfPlayersScreen(
         lazyPagingItems = lazyPagingItems,
         navigateToPlayerDetail = {
             navController.navigate(Route.PlayerDetail.route.replace("{${Route.PLAYER_DETAIL_ID_KEY}}", it))
+        },
+        onBackPressed = {
+            navController.popBackStack()
         }
     )
 }
@@ -63,15 +66,17 @@ fun PlayerListItem(
 private fun ListOfPlayersContent(
     lazyPagingItems: LazyPagingItems<PlayerListItemUiState>,
     navigateToPlayerDetail: (id: String) -> Unit,
+    onBackPressed: () -> Unit = {},
 ) {
     ScaffoldWithTopBar(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
+            .fillMaxSize(),
+        onBackPressed = onBackPressed,
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
+                .padding(horizontal = 16.dp)
         ) {
             when (lazyPagingItems.loadState.refresh) {
                 is LoadState.Loading -> {
