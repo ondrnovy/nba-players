@@ -7,12 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.ondrnovy.nbaplayers.presentation.theme.NBAPlayersTheme
-import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamViewModel
+import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamDetailViewModel
 
 @Composable
 fun TeamDetailScreen(
     navController: NavController,
-    viewModel: TeamViewModel,
+    viewModel: TeamDetailViewModel,
 ) {
     val uiState by viewModel.teamDetailUiState.collectAsState()
 

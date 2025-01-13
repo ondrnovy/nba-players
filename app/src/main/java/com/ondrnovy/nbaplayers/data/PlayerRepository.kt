@@ -19,4 +19,13 @@ class PlayerRepository(
             Result.failure(Exception("Network error: ${e.localizedMessage}", e))
         }
 
+
+    suspend fun getPlayerById(
+        id: Int,
+    ) = try {
+        Result.success(ballDontLieApi.getPlayerById(id).toEntity())
+    } catch (e: Exception) {
+        Result.failure(Exception("Network error: ${e.localizedMessage}", e))
+    }
+
 }

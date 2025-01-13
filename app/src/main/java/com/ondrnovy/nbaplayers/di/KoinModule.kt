@@ -1,13 +1,11 @@
 package com.ondrnovy.nbaplayers.di
 
 import com.ondrnovy.nbaplayers.AppConfig
-import com.ondrnovy.nbaplayers.network.AuthenticationInterceptor
 import com.ondrnovy.nbaplayers.data.PlayerRepository
 import com.ondrnovy.nbaplayers.data.TeamRepository
 import com.ondrnovy.nbaplayers.presentation.pagination.PlayersPagingSource
 import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayersViewModel
-import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamViewModel
-import okhttp3.OkHttpClient
+import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -46,6 +44,6 @@ val koinModule: Module = module {
     }
 
     viewModel {
-        TeamViewModel(get())
+        TeamDetailViewModel(get())
     }
 }

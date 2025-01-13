@@ -1,3 +1,4 @@
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,21 +17,25 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ondrnovy.nbaplayers.presentation.model.PlayerListItemUiState
+import com.ondrnovy.nbaplayers.presentation.routing.Route
 import com.ondrnovy.nbaplayers.presentation.view.CenteredLoader
 import com.ondrnovy.nbaplayers.presentation.view.ScaffoldWithTopBar
-import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayersViewModel
+import com.ondrnovy.nbaplayers.presentation.viewmodel.ListOfPLayersViewModel
 
 
 @Composable
 fun ListOfPlayersScreen(
     navController: NavController,
-    viewModel: PlayersViewModel,
+    viewModel: ListOfPLayersViewModel,
 ) {
     val lazyPagingItems = viewModel.playersPagingDataFlow.collectAsLazyPagingItems()
 
 
     ListOfPlayersContent(
         lazyPagingItems = lazyPagingItems,
+        navigateToPlayerDetail = {
+            navController.navigate(Route.PlayerDetail)
+        }
     )
 }
 
@@ -38,10 +43,11 @@ fun ListOfPlayersScreen(
 @Composable
 fun PlayerListItem(
     uiState: PlayerListItemUiState,
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     ListItem(
-        modifier = modifier,
+        modifier = modifier.clickable { onClick() },
         headlineContent = {
             Text(text = uiState.fullName)
         },
@@ -57,8 +63,8 @@ fun PlayerListItem(
 @Composable
 fun ListOfPlayersContent(
     lazyPagingItems: LazyPagingItems<PlayerListItemUiState>,
+    navigateToPlayerDetail: (id: String) -> Unit,
 ) {
-
     ScaffoldWithTopBar(
         modifier = Modifier
             .fillMaxSize()
@@ -91,6 +97,9 @@ fun ListOfPlayersContent(
                                         .padding(vertical = 8.dp)
                                         .fillMaxWidth(),
                                     uiState = it,
+                                    onClick = {
+                                        navigateToPlayerDetail(item.id)
+                                    }
                                 )
                             }
                         }

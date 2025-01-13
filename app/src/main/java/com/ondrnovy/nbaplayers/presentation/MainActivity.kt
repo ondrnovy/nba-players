@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.ondrnovy.nbaplayers.presentation.routing.PlayersRouter
+import com.ondrnovy.nbaplayers.presentation.routing.Router
 import com.ondrnovy.nbaplayers.presentation.theme.NBAPlayersTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NBAPlayersTheme {
-                PlayersRouter()
+                Router()
             }
         }
     }

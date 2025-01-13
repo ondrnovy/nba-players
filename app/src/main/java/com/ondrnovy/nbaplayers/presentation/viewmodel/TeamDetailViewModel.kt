@@ -15,7 +15,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-class TeamViewModel(
+class TeamDetailViewModel(
+    private val id: String,
     val teamRepository: TeamRepository,
 ) : ViewModel() {
 

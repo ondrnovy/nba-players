@@ -16,9 +16,9 @@ interface BallDontLieApi {
     ): PaginatedResponse<PlayerApiObject>
 
     @GET("players/{id}")
-    fun getPlayerById(
+    suspend fun getPlayerById(
         @Path("id") id: Int
-    ): Call<PlayerApiObject>
+    ): PlayerApiObject
 
     @GET("teams")
     fun getTeams(): Call<List<TeamApiObject>>

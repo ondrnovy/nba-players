@@ -12,31 +12,43 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayersViewModel
+import com.ondrnovy.nbaplayers.presentation.routing.Route.Companion.PLAYER_DETAIL_ID_KEY
+import com.ondrnovy.nbaplayers.presentation.routing.Route.Companion.TEAM_DETAIL_ID_KEY
+import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayerDetailViewModel
+import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamDetailViewModel
+import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
-fun PlayersRouter() {
+fun Router() {
     val navController = rememberNavController()
-    val viewModel: PlayersViewModel = koinViewModel()
 
-    NavHost(navController, startDestination = Routes.ListOfPlayers.route) {
-        composable(Routes.ListOfPlayers.route) {
+    NavHost(navController, startDestination = Route.ListOfPlayers.route) {
+        composable(Route.ListOfPlayers.route) {
             ListOfPlayersScreen(
                 navController = navController,
-                viewModel = viewModel,
+                viewModel = koinViewModel(),
             )
         }
-        composable(Routes.PlayerDetail.route) {
+        composable(Route.PlayerDetail.route) { navBackStackEntry ->
+            val playerId = navBackStackEntry.arguments?.getString(PLAYER_DETAIL_ID_KEY)
+
             PlayerDetailScreen(
                 navController = navController,
-                viewModel = viewModel,
+                viewModel = koinViewModel<PlayerDetailViewModel>(
+                    parameters = { parametersOf(playerId) }
+                ),
             )
         }
-        composable(Routes.TeamDetail.route) {
+        composable(Route.TeamDetail.route) { navBackStackEntry ->
+            val teamId = navBackStackEntry.arguments?.getString(TEAM_DETAIL_ID_KEY)
+
             TeamDetailScreen(
                 navController = navController,
-                viewModel = koinViewModel(),
+                viewModel = koinViewModel<TeamDetailViewModel>(
+                    parameters = { parametersOf(teamId) }
+                ),
             )
         }
     }
