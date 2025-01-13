@@ -5,6 +5,11 @@ import androidx.paging.PagingState
 import com.ondrnovy.nbaplayers.data.PlayerRepository
 import com.ondrnovy.nbaplayers.data.model.PlayerEntity
 
+/**
+ * Paging source for players
+ *
+ * @param playerRepository Repository for getting the players data.
+ */
 class PlayersPagingSource(
     private val playerRepository: PlayerRepository,
 ) : PagingSource<Int, PlayerEntity>() {

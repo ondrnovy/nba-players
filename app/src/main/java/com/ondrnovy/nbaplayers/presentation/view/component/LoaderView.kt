@@ -6,6 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
+/**
+ * View that shows a loader.
+ */
 @Composable
 fun LoaderView(
     modifier: Modifier = Modifier,

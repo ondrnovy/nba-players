@@ -1,5 +1,8 @@
 package com.ondrnovy.nbaplayers.presentation.routing
 
+/**
+ * Navigation routes used by compose navigation
+ */
 sealed class Route(val route: String) {
     data object ListOfPlayers : Route("list_of_players")
     data object PlayerDetail : Route("player_detail/{$PLAYER_DETAIL_ID_KEY}")

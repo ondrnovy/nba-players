@@ -10,6 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * View that shows a single info item.
+ */
 @Composable
 fun InfoItem(
     title: String,

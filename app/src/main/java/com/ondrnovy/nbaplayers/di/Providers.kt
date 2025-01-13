@@ -8,7 +8,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+/**
+ * Returns [OkHttpClient] with injected authentication token.
+ */
 fun provideOkHttpClient(
     authToken: String,
 ): OkHttpClient {
@@ -23,6 +25,7 @@ fun provideOkHttpClient(
  * Creates new Retrofit instance
  *
  * @param baseUrl API base URL
+ * @param okHttpClient Http client that injects authentication token
  *
  * @return Retrofit instance
  */

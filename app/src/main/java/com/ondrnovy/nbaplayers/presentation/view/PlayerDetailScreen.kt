@@ -26,6 +26,12 @@ import com.ondrnovy.nbaplayers.presentation.view.component.LoaderView
 import com.ondrnovy.nbaplayers.presentation.view.component.ScaffoldWithTopBar
 import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayerDetailViewModel
 
+/**
+ * Screen with the details of a player
+ *
+ * @param navController Navigation controller
+ * @param viewModel ViewModel for this screen
+ */
 @Composable
 fun PlayerDetailScreen(
     navController: NavController,

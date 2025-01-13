@@ -7,6 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
+/**
+ * View that shows an error message.
+ */
 @Composable
 fun ErrorView(
     modifier: Modifier = Modifier,

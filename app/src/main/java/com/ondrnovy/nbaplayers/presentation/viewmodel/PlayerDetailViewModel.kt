@@ -13,8 +13,14 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for [PlayerDetailScreen]
+ * 
+ * @param playerId ID of the player to be shown
+ * @param playerRepository Repository used for loading the player
+ */
 class PlayerDetailViewModel(
-    private val id: String,
+    private val playerId: String,
     private val playerRepository: PlayerRepository,
 ) : ViewModel() {
 
@@ -23,7 +29,7 @@ class PlayerDetailViewModel(
             PlayerDetailViewModelState(
                 isLoading = false,
                 error = "",
-                selectedPlayer = null,
+                player = null,
             ),
         )
 
@@ -45,12 +51,12 @@ class PlayerDetailViewModel(
         }
 
         viewModelScope.launch {
-            playerRepository.getPlayerById(id.toInt())
+            playerRepository.getPlayerById(playerId.toInt())
                 .onSuccess {  player ->
                     viewModelState.update {
                         it.copy(
                             isLoading = false,
-                            selectedPlayer = player,
+                            player = player,
                         )
                     }
                 }
@@ -73,13 +79,13 @@ class PlayerDetailViewModel(
 data class PlayerDetailViewModelState(
     val isLoading: Boolean,
     val error: String,
-    val selectedPlayer: PlayerEntity?,
+    val player: PlayerEntity?,
 ) {
     fun toPlayerDetailUiState(): PlayerDetailUiState {
         return if (isLoading){
             PlayerDetailUiState.Loading
         } else if (error.isNotEmpty()){
             PlayerDetailUiState.Error(error)
-        } else selectedPlayer?.toPlayerDetailUiState() ?: PlayerDetailUiState.Empty
+        } else player?.toPlayerDetailUiState() ?: PlayerDetailUiState.Empty
     }
 }

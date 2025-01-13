@@ -13,8 +13,14 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for [PlayerDetailScreen]
+ *
+ * @param teamId ID of the team to be shown
+ * @param teamRepository Repository used for loading the team
+ */
 class TeamDetailViewModel(
-    private val id: String,
+    private val teamId: String,
     private val teamRepository: TeamRepository,
 ) : ViewModel() {
 
@@ -44,7 +50,7 @@ class TeamDetailViewModel(
         }
 
         viewModelScope.launch {
-            teamRepository.getTeamById(id.toInt())
+            teamRepository.getTeamById(teamId.toInt())
                 .onSuccess {  team ->
                     viewModelState.update {
                         it.copy(

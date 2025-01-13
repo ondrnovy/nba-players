@@ -14,6 +14,9 @@ import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamDetailViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+/**
+ * Navigation host used as composable entry point for the app.
+ */
 @Composable
 fun Router() {
     val navController = rememberNavController()

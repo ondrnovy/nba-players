@@ -20,6 +20,12 @@ import com.ondrnovy.nbaplayers.presentation.view.component.LoaderView
 import com.ondrnovy.nbaplayers.presentation.view.component.ScaffoldWithTopBar
 import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamDetailViewModel
 
+/**
+ * Screen with the details of a team
+ *
+ * @param navController Navigation controller
+ * @param viewModel ViewModel for this screen
+ */
 @Composable
 fun TeamDetailScreen(
     navController: NavController,
@@ -32,8 +38,6 @@ fun TeamDetailScreen(
         onBackPressed = { navController.popBackStack() }
     )
 }
-
-
 
 @Composable
 private fun TeamDetailContent(

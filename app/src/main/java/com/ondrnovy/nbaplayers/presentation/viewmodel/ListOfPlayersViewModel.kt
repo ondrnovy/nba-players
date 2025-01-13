@@ -12,6 +12,11 @@ import com.ondrnovy.nbaplayers.presentation.model.toUiState
 import com.ondrnovy.nbaplayers.presentation.pagination.PlayersPagingSource
 import kotlinx.coroutines.flow.map
 
+/**
+ * ViewModel for [ListOfPlayersScreen]
+ *
+ * @param playerRepository Repository for getting the players to be shown
+ */
 class ListOfPlayersViewModel(
     val playerRepository: PlayerRepository,
 ) : ViewModel() {
