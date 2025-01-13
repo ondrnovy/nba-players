@@ -1,3 +1,5 @@
+package com.ondrnovy.nbaplayers.presentation.view
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,7 +23,6 @@ import com.ondrnovy.nbaplayers.presentation.view.component.LoaderView
 import com.ondrnovy.nbaplayers.presentation.view.component.ScaffoldWithTopBar
 import com.ondrnovy.nbaplayers.presentation.viewmodel.ListOfPlayersViewModel
 
-
 @Composable
 fun ListOfPlayersScreen(
     navController: NavController,
@@ -37,7 +38,6 @@ fun ListOfPlayersScreen(
         },
     )
 }
-
 
 @Composable
 fun PlayerListItem(
@@ -131,21 +131,3 @@ private fun ListOfPlayersContent(
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun ListOfPlayersScreenPreview() {
-    NBAPlayersTheme {
-        ListOfPlayersContent(
-            uiState = ListOfPlayersUiState.Content(
-                playerList = listOf(
-                    PlayerListItemUiState("1","Player 1"),
-                    PlayerListItemUiState("2","Player 2"),
-                    PlayerListItemUiState("3","Player 3"),
-                    PlayerListItemUiState("4","Player 4"),
-                )
-            )
-        )
-    }
-}*/

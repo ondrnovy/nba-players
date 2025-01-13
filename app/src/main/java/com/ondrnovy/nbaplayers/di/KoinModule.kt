@@ -11,7 +11,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-
 val koinModule: Module = module {
     single {
         provideOkHttpClient(authToken = AppConfig.API_KEY)

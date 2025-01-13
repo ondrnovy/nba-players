@@ -1,8 +1,3 @@
-/*
-* Urheberrechtshinweis: Diese Software ist urheberrechtlich geschützt. Das Urheberrecht liegt bei
-* Research Industrial Systems Engineering (RISE) Forschungs-, Entwicklungs- und Großprojektberatung GmbH,
-* soweit nicht im Folgenden näher gekennzeichnet.
-*/
 package com.ondrnovy.nbaplayers.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
@@ -20,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class PlayerDetailViewModel(
     private val id: String,
-    val playerRepository: PlayerRepository,
+    private val playerRepository: PlayerRepository,
 ) : ViewModel() {
 
     private val viewModelState =
@@ -42,7 +37,7 @@ class PlayerDetailViewModel(
             )
 
 
-    fun loadPlayerById() {
+    private fun loadPlayerById() {
         viewModelState.update {
             it.copy(
                 isLoading = true,
@@ -85,10 +80,6 @@ data class PlayerDetailViewModelState(
             PlayerDetailUiState.Loading
         } else if (error.isNotEmpty()){
             PlayerDetailUiState.Error(error)
-        } else if (selectedPlayer != null) {
-            selectedPlayer.toPlayerDetailUiState()
-        } else {
-            PlayerDetailUiState.Empty
-        }
+        } else selectedPlayer?.toPlayerDetailUiState() ?: PlayerDetailUiState.Empty
     }
 }

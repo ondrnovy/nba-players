@@ -1,17 +1,10 @@
-/*
-* Urheberrechtshinweis: Diese Software ist urheberrechtlich geschützt. Das Urheberrecht liegt bei
-* Research Industrial Systems Engineering (RISE) Forschungs-, Entwicklungs- und Großprojektberatung GmbH,
-* soweit nicht im Folgenden näher gekennzeichnet.
-*/
 package com.ondrnovy.nbaplayers.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ondrnovy.nbaplayers.data.TeamRepository
 import com.ondrnovy.nbaplayers.data.model.TeamEntity
-import com.ondrnovy.nbaplayers.presentation.model.PlayerDetailUiState
 import com.ondrnovy.nbaplayers.presentation.model.TeamDetailUiState
-import com.ondrnovy.nbaplayers.presentation.model.toPlayerDetailUiState
 import com.ondrnovy.nbaplayers.presentation.model.toTeamDetailUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class TeamDetailViewModel(
     private val id: String,
-    val teamRepository: TeamRepository,
+    private val teamRepository: TeamRepository,
 ) : ViewModel() {
 
     private val viewModelState =
@@ -43,7 +36,7 @@ class TeamDetailViewModel(
                 viewModelState.value.toTeamDetailUiState(),
             )
 
-    fun loadTeamById() {
+    private fun loadTeamById() {
         viewModelState.update {
             it.copy(
                 isLoading = true,
@@ -86,10 +79,6 @@ data class TeamViewModelState(
             TeamDetailUiState.Loading
         } else if (error.isNotEmpty()){
             TeamDetailUiState.Error(error)
-        } else if (team != null) {
-            team.toTeamDetailUiState()
-        } else {
-            TeamDetailUiState.Empty
-        }
+        } else team?.toTeamDetailUiState() ?: TeamDetailUiState.Empty
     }
 }

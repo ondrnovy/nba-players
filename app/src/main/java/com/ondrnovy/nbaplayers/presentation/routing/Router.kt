@@ -1,13 +1,8 @@
-/*
-* Urheberrechtshinweis: Diese Software ist urheberrechtlich geschützt. Das Urheberrecht liegt bei
-* Research Industrial Systems Engineering (RISE) Forschungs-, Entwicklungs- und Großprojektberatung GmbH,
-* soweit nicht im Folgenden näher gekennzeichnet.
-*/
 package com.ondrnovy.nbaplayers.presentation.routing
 
-import ListOfPlayersScreen
-import PlayerDetailScreen
-import TeamDetailScreen
+import com.ondrnovy.nbaplayers.presentation.view.ListOfPlayersScreen
+import com.ondrnovy.nbaplayers.presentation.view.PlayerDetailScreen
+import com.ondrnovy.nbaplayers.presentation.view.TeamDetailScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,7 +11,6 @@ import com.ondrnovy.nbaplayers.presentation.routing.Route.Companion.PLAYER_DETAI
 import com.ondrnovy.nbaplayers.presentation.routing.Route.Companion.TEAM_DETAIL_ID_KEY
 import com.ondrnovy.nbaplayers.presentation.viewmodel.PlayerDetailViewModel
 import com.ondrnovy.nbaplayers.presentation.viewmodel.TeamDetailViewModel
-import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 

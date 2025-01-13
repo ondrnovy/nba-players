@@ -1,6 +1,5 @@
 package com.ondrnovy.nbaplayers.presentation.model
 
-
 sealed class PlayerDetailUiState{
     data object Empty : PlayerDetailUiState()
 

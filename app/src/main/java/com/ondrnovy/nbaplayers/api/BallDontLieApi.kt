@@ -4,7 +4,6 @@ import com.ondrnovy.nbaplayers.api.model.PaginatedResponse
 import com.ondrnovy.nbaplayers.api.model.PlayerApiObject
 import com.ondrnovy.nbaplayers.api.model.Response
 import com.ondrnovy.nbaplayers.api.model.TeamApiObject
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

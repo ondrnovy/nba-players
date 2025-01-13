@@ -1,8 +1,3 @@
-/*
-* Urheberrechtshinweis: Diese Software ist urheberrechtlich geschützt. Das Urheberrecht liegt bei
-* Research Industrial Systems Engineering (RISE) Forschungs-, Entwicklungs- und Großprojektberatung GmbH,
-* soweit nicht im Folgenden näher gekennzeichnet.
-*/
 package com.ondrnovy.nbaplayers.network
 
 import okhttp3.Interceptor
@@ -15,7 +10,7 @@ class AuthenticationInterceptor(private val authToken: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest: Request = chain.request()
         val requestWithAuth: Request = originalRequest.newBuilder()
-            .header("Authorization", "$authToken")
+            .header("Authorization", authToken)
             .build()
         return chain.proceed(requestWithAuth)
     }

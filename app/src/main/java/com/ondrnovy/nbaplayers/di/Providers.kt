@@ -2,7 +2,6 @@ package com.ondrnovy.nbaplayers.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.ondrnovy.nbaplayers.AppConfig
 import com.ondrnovy.nbaplayers.api.BallDontLieApi
 import com.ondrnovy.nbaplayers.network.AuthenticationInterceptor
 import okhttp3.OkHttpClient

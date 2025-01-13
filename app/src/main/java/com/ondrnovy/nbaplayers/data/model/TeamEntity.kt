@@ -9,4 +9,3 @@ data class TeamEntity(
     val fullName: String,
     val abbreviation: String
 )
-
